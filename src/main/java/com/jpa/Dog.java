@@ -1,7 +1,6 @@
 package com.jpa;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 
@@ -12,7 +11,6 @@ public class Dog {
         可以在pom中加入Javax Persistence API 的依赖
      */
     @Id
-    @GeneratedValue
     private Integer id;//编号
     private Integer age;//年龄
     private String name;//名字
