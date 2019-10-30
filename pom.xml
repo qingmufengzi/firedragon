@@ -20,6 +20,7 @@
     <!-- 注意：加入子模块 -->
     <modules>
         <module>demo-sjms</module>
+        <module>demo-license</module>
     </modules>
 
     <properties>
