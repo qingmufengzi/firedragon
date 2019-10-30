@@ -19,8 +19,10 @@
 
     <!-- 注意：加入子模块 -->
     <modules>
+        <module>demo-web</module>
         <module>demo-sjms</module>
         <module>demo-license</module>
+        <module>demo-stream</module>
     </modules>
 
     <properties>

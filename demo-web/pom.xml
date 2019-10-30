@@ -2,28 +2,34 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.0.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-    <groupId>com</groupId>
+
+    <!--<groupId>com</groupId>-->
     <artifactId>demo-web</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <!--<version>0.0.1-SNAPSHOT</version>-->
     <name>demo-web</name>
+    <packaging>war</packaging>
     <description>Demo project for Spring Boot</description>
 
-    <properties>
+    <parent>
+        <groupId>com</groupId>
+        <artifactId>firedragon</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
+    </parent>
+
+    <!--<properties>
         <java.version>1.8</java.version>
-    </properties>
+    </properties>-->
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -35,8 +41,57 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- 使用 jsp 必要依赖 -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+        <!-- 加入其余模块的依赖 -->
+        <!--<dependency>
+            <groupId>com.demo</groupId>
+            <artifactId>demo-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>com.demo</groupId>
+            <artifactId>demo-static</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            &lt;!&ndash; 因为static是war打包方式 所以必须声明，不然默认为jar包方式 &ndash;&gt;
+            <type>war</type>
+        </dependency>-->
     </dependencies>
 
+    <!--方式1：打jar包-->
+    <!--<build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                &lt;!&ndash; 当所依赖的其他模块，有启动类的时候，需要以下配置，指定唯一启动类，
+                        本次事例未涉及其他模块有启动类，可自行测试 &ndash;&gt;
+                <configuration>
+                    &lt;!&ndash; 指定该Main Class为全局的唯一入口 &ndash;&gt;
+                    <mainClass>com.demo.demoapply.DemoApplyApplication</mainClass>
+                    <layout>ZIP</layout>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>&lt;!&ndash;可以把依赖的包都打包到生成的Jar包中&ndash;&gt;
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>-->
+
+    <!--方式2：打war包-->
     <build>
         <plugins>
             <plugin>
@@ -45,5 +100,30 @@
             </plugin>
         </plugins>
     </build>
+
+    <!--方式3：打war包-->
+    <!--<build>
+        <plugins>
+            &lt;!&ndash; 在总的web的pom里面，加入要合并的war内容 &ndash;&gt;
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <overlays>
+                        &lt;!&ndash; 模块war1:如客户 &ndash;&gt;
+                        <overlay>
+                            <groupId>com.demo</groupId>
+                            <artifactId>demo-common</artifactId>
+                        </overlay>
+                        &lt;!&ndash; 模块war2:如订单 &ndash;&gt;
+                        <overlay>
+                            <groupId>com.demo</groupId>
+                            <artifactId>demo-static</artifactId>
+                        </overlay>
+                    </overlays>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>-->
 
 </project>
