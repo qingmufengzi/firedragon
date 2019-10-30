@@ -9,6 +9,7 @@
     <!-- maven可以继承父项目中的参数，所以可以删除子模块中定义 -->
     <!--<version>0.0.1-SNAPSHOT</version>-->
     <name>demo-stream</name>
+    <packaging>war</packaging>
     <description>Demo project for Spring Boot</description>
 
     <!--<parent>

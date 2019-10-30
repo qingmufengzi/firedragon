@@ -9,6 +9,7 @@
     <!-- maven可以继承父项目中的参数，所以可以删除子模块中定义 -->
     <!--<version>0.0.1-SNAPSHOT</version>-->
     <name>demo-web</name>
+    <packaging>war</packaging>
     <description>Demo project for Spring Boot</description>
 
     <!--<parent>
@@ -48,25 +49,80 @@
                 </exclusion>
             </exclusions>
         </dependency>-->
+
+        <!-- 加入其余模块的依赖 -->
+        <!--<dependency>
+            <groupId>com.demo</groupId>
+            <artifactId>demo-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>com.demo</groupId>
+            <artifactId>demo-static</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            &lt;!&ndash; 因为static是war打包方式 所以必须声明，不然默认为jar包方式 &ndash;&gt;
+            <type>war</type>
+        </dependency>-->
     </dependencies>
 
-    <build>
+    <!--方式1：打jar包-->
+    <!--<build>
         <plugins>
-            <!--<plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>-->
-            <!-- 修改springboot的编译插件为maven编译插件 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                &lt;!&ndash; 当所依赖的其他模块，有启动类的时候，需要以下配置，指定唯一启动类，
+                        本次事例未涉及其他模块有启动类，可自行测试 &ndash;&gt;
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    &lt;!&ndash; 指定该Main Class为全局的唯一入口 &ndash;&gt;
+                    <mainClass>com.demo.demoapply.DemoApplyApplication</mainClass>
+                    <layout>ZIP</layout>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>&lt;!&ndash;可以把依赖的包都打包到生成的Jar包中&ndash;&gt;
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>-->
+
+    <!--方式2：打war包-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
+
+    <!--方式3：打war包-->
+    <!--<build>
+        <plugins>
+            &lt;!&ndash; 在总的web的pom里面，加入要合并的war内容 &ndash;&gt;
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <overlays>
+                        &lt;!&ndash; 模块war1:如客户 &ndash;&gt;
+                        <overlay>
+                            <groupId>com.demo</groupId>
+                            <artifactId>demo-common</artifactId>
+                        </overlay>
+                        &lt;!&ndash; 模块war2:如订单 &ndash;&gt;
+                        <overlay>
+                            <groupId>com.demo</groupId>
+                            <artifactId>demo-static</artifactId>
+                        </overlay>
+                    </overlays>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>-->
 
 </project>

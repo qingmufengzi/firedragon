@@ -1,3 +1,4 @@
+/*
 package com.demo.demojpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,11 @@ public class DogService {
     @Autowired
     private DogRepository dogRepository;
 
-    /**
+    */
+/**
      * 同时添加两条记录
-     */
+     *//*
+
     @Transactional  //加入事务控制
     public void addTwoDog() {
         //模拟两条数据
@@ -29,3 +32,4 @@ public class DogService {
         dogRepository.save(dog2);
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.demo.demojpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,43 +7,51 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+*/
 /**
  * 控制层
- */
+ *//*
+
 @RestController
 public class DogController {
     //因为业务太简单，所有我们省略service层，直接调用数据访问层的代码
     @Autowired
     private DogRepository dogRepository;
 
-    /**
+    */
+/**
      * 查询所有女生列表
      *
      * @return
-     */
+     *//*
+
     @GetMapping(value = "/dogs")
     public List<Dog> dogList() {
         return dogRepository.findAll();//findAll()方法是底层帮我没实现好的
     }
 
-    /**
+    */
+/**
      * 根据id查询指定的Dog
      *
      * @param id
      * @return
-     */
+     *//*
+
     @GetMapping(value = "/dog/{id}")
     public Optional<Dog> findDogById(@PathVariable("id") Integer id) {
         return dogRepository.findById(id);//注意这个方法的返回值
     }
 
-    /**
+    */
+/**
      * 添加一个Dog
      *
      * @param age
      * @param name
      * @return
-     */
+     *//*
+
     @PostMapping(value = "/addDog")
     public Dog addDog(@RequestParam("age") Integer age,
                       @RequestParam("name") String name) {
@@ -52,14 +61,16 @@ public class DogController {
         return dogRepository.save(dog);
     }
 
-    /**
+    */
+/**
      * 更新Dog信息
      *
      * @param id
      * @param age
      * @param name
      * @return
-     */
+     *//*
+
     @PutMapping(value = "updateDog/{id}")
     public Dog updateDog(@PathVariable("id") Integer id,
                          @RequestParam("age") Integer age,
@@ -73,19 +84,23 @@ public class DogController {
     }
 
 
-    /**
+    */
+/**
      * 删除一条记录
      *
      * @param id
-     */
+     *//*
+
     @DeleteMapping(value = "/del/{id}")
     public void delDogById(@PathVariable("id") Integer id) {
         dogRepository.deleteById(id);
     }
 
-    /**
+    */
+/**
      * 根据年龄来查询
-     */
+     *//*
+
     @GetMapping(value = "/dogs/{age}")
     public List<Dog> dogList(@PathVariable("age") Integer age) {
         return dogRepository.findByAge(age);
@@ -95,9 +110,11 @@ public class DogController {
     @Autowired
     private DogService dogService;
 
-    /**
+    */
+/**
      * 事务测试的方法
-     */
+     *//*
+
     @GetMapping(value = "/dogs/tx")
     public void txTest() {
         System.out.println("进入了controller");
@@ -105,3 +122,4 @@ public class DogController {
     }
 
 }
+*/
